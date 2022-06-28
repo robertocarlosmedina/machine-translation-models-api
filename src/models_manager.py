@@ -49,11 +49,11 @@ class Models_Manager:
                     "blue", attrs={"bold"})
             )
             return self.response_message(translation, [])
-            
-        print(
-            colored(f"TRANSLATE ERROR: bad parameters configuration", "red", attrs={"bold"}))
-        return self.response_message(
-            None, [valid_model[1], valid_sentence[1], valid_src_trg[1]])
+        
+        error_list = [valid_model[1], valid_sentence[1], valid_src_trg[1]]
+        [print(colored(f"ERROR: {error}", "red", attrs={"bold"})) for error in error_list if error]
+
+        return self.response_message(None, error_list)
 
     def model_exits(self, model: str) -> list:
         """
