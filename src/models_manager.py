@@ -18,12 +18,10 @@ class Models_Manager:
     
     def get_models_parameters(self) -> dict:
 
-        parameters_nr = {}
-        parameters_nr["gru"] = self.models["gru"].get_model_parameters()
-        parameters_nr["lstm"] = self.models["lstm"].get_model_parameters()
-        parameters_nr["transformer"] = self.models["transformer"].get_model_parameters()
+        model_descrition = [{"name": key, "parameters": value.get_model_parameters()}
+                for key, value in self.models.items()]
 
-        return {"data": [parameters_nr]}
+        return {"data": {"translator_models": model_descrition}}
     
     def translate(self, model: str, source: str, target: str, sentence) -> str:
         """
