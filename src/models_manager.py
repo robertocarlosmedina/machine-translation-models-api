@@ -18,7 +18,7 @@ class Models_Manager:
         self.src_trg_list = ["en", "cv"]
     
     def capitalize_names(self, name: str) -> str:
-        if len(name < 6):
+        if len(name) < 6:
             return name.upper()
         
         return name.capitalize()
