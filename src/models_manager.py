@@ -10,23 +10,17 @@ class Models_Manager:
     def __init__(self) -> None:
 
         self.models = {
-            "gru": GRU_Controller(),
-            "lstm": LSTM_Controller(),
-            "transformer": Transformer_Controller()
+            "GRU": GRU_Controller(),
+            "LSTM": LSTM_Controller(),
+            "Transformer": Transformer_Controller()
         }
 
         self.src_trg_list = ["en", "cv"]
     
-    def capitalize_names(self, name: str) -> str:
-        if len(name) < 6:
-            return name.upper()
-        
-        return name.capitalize()
-    
     def get_models_parameters(self) -> dict:
 
         model_descrition = [
-            {"name": self.capitalize_names(key), "parameters": value.get_model_parameters()}
+            {"name": key, "parameters": value.get_model_parameters()}
             for key, value in self.models.items()
         ]
 
@@ -37,6 +31,7 @@ class Models_Manager:
             Method to translate a sentence according to the model 
             source and target languague.
         """
+        model = model
         valid_model = self.model_exits(model)
         valid_src_trg = self.valid_source_and_target(source, target)
         valid_sentence = self.valid_sentence(sentence)
