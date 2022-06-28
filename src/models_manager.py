@@ -1,4 +1,5 @@
-from sqlalchemy import true
+from termcolor import colored
+
 from src.transfomer_controler import Transformer_Controller
 from src.gru_controler import GRU_Controller
 from src.lstm_controller import LSTM_Controller
@@ -34,8 +35,15 @@ class Models_Manager:
 
         if valid_sentence[0] and valid_model[0] and valid_src_trg[0]:
             translation = self.models[model].translate(f"{source}-{target}", sentence)
+            print(
+                colored(
+                    f"TRANSLATE: {sentence}, model: {model}, direction: {source}-{target}", 
+                    "blue", attrs={"bold"})
+            )
             return self.response_message(translation, [])
-        
+            
+        print(
+            colored(f"TRANSLATE ERROR: bad parameters configuration", "red", attrs={"bold"}))
         return self.response_message(
             None, [valid_model[1], valid_sentence[1], valid_src_trg[1]])
 
