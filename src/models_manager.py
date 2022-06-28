@@ -17,10 +17,18 @@ class Models_Manager:
 
         self.src_trg_list = ["en", "cv"]
     
+    def capitalize_names(self, name: str) -> str:
+        if len(name < 6):
+            return name.upper()
+        
+        return name.capitalize()
+    
     def get_models_parameters(self) -> dict:
 
-        model_descrition = [{"name": key, "parameters": value.get_model_parameters()}
-                for key, value in self.models.items()]
+        model_descrition = [
+            {"name": self.capitalize_names(key), "parameters": value.get_model_parameters()}
+            for key, value in self.models.items()
+        ]
 
         return {"data": {"translator_models": model_descrition}}
     
